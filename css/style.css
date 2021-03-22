@@ -4,13 +4,21 @@ Buttons, etc:	#726FB9 (blue)
 hover color:	#fed136 (yellow)
 -------------------------------------------------------------------*/
 /* main font for menu. */
-@import url(http://fonts.googleapis.com/css?family=Lora:400|Raleway:100,200,300,400,500,700,800);
+@import url(http://fonts.googleapis.com/css?family=Lora:400|Raleway:100,200,300,400,500,700,800|Raleway:100,200,300,);
+@import url('https://fonts.googleapis.com/css2?family=Over+the+Rainbow&display=swap');
 /*- General -*/
 body {
 	font-family: "Raleway", Sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
-h1,
+h1 {
+	letter-spacing: -0.04em;
+	font-size: 60px;
+	font-weight: 700;
+	font-style: normal;
+	font-family: 'Over the Rainbow', cursive;
+	color: #000000;
+}
 h2,
 h3,
 h4,
