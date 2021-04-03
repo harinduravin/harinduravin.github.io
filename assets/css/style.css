@@ -5,7 +5,7 @@ hover color:	#fed136 (yellow)
 -------------------------------------------------------------------*/
 /* main font for menu. */
 @import url(http://fonts.googleapis.com/css?family=Lora:400|Raleway:100,200,300,400,500,700,800|Raleway:100,200,300,);
-@import url('https://fonts.googleapis.com/css2?family=Over+the+Rainbow&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
 /*- General -*/
 body {
 	font-family: "Raleway", Sans-serif;
@@ -13,10 +13,10 @@ body {
 }
 h1 {
 	letter-spacing: -0.04em;
-	font-size: 60px;
+	font-size: 100px;
 	font-weight: 700;
 	font-style: normal;
-	font-family: 'Over the Rainbow', cursive;
+	font-family: 'Tangerine', serif;
 	color: #000000;
 }
 h2,
