@@ -247,6 +247,16 @@ header {
 	letter-spacing: 0.1px;
 	margin-bottom: 30px;
 }
+.blog-post .blog-post-text a{
+	text-align: left;
+	font-size: 17px;
+	color: rgb(31, 111, 231);
+}
+.blog-post .blog-post-text blockquote{
+	text-align: justify;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
 /*- Sidebar -*/
 .sidebar-title {
 	background-color: #2B2B2B;

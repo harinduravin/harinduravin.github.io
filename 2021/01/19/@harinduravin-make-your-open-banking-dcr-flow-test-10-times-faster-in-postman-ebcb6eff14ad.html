@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="icon" href="/images/infinity.png">
-		<title>Infinity & Beyond! - Setting up legacy 1997 Joint Strike Fighter (JSF) game on Windows 10 system</title>
+		<title>Infinity & Beyond! - Make your Open Banking DCR flow test 10 times faster in Postman</title>
 		<!-- Bootstrap core CSS -->
 		<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -60,98 +60,133 @@
                 <div class="col-md-8">
 <article class="blog-post">
     <div class="blog-post-body">
-        <h2><a href=#>Setting up legacy 1997 Joint Strike Fighter (JSF) game on Windows 10 system</a></h2>
-        <div class="post-meta"><span>by <a href="#">Harindu Jayarathne</a></span>|<span><i class="fa fa-clock-o"></i>30 Dec 2020</span></div>
+        <h2><a href=#>Make your Open Banking DCR flow test 10 times faster in Postman</a></h2>
+        <div class="post-meta"><span>by <a href="#">Harindu Jayarathne</a></span>|<span><i class="fa fa-clock-o"></i>19 Jan 2021</span></div>
         <div class="blog-post-text">
-            <p><img src="https://cdn-images-1.medium.com/max/800/0*4hRbzd_aLxHymj3K.jpg" alt="" /></p>
+            <p>I’m assuming you are already familiar with “What is DCR in open banking?” before start reading this article. In case you are not familiar, please use the link here for one of my previous articles on <a href="https://harinduravin.medium.com/an-analysis-of-uk-and-australia-dcr-specifications-df7348275b4c">DCR (Dynamic Client Registration)</a>.</p>
 
-<p><strong><em>Joint Strike Fighter</em></strong> is a 1997 combat flight simulator designed by Innerloop Studios and published by Eidos Interactive. Innerloop produced the game chiefly to be a showcase for their cutting edge game engine, which they planned to license to other game developers. Innerloop Studios was the creator of famous combat game series called IGI (I’m Going In). Here is how I setup this old game on windows 10 computer after facing a lot of issues.</p>
+<p><img src="https://cdn-images-1.medium.com/max/600/0*LQBZ1s7jkWdae94F.png" alt="" /></p>
 
-<p>First I downloaded the game through this link. There is a mountable disk image of size 604MB. Additionally, there is a 160 page manual for the game play.</p>
+<h4 id="what-ispostman">What is postman?</h4>
 
-<p><a href="https://www.myabandonware.com/game/jsf-dh2#download" title="https://www.myabandonware.com/game/jsf-dh2#download"><strong>JSF (Windows)</strong><br />
-_If you haven’t played JSF or want to try this simulation video game, download it now for free! Published in 1997 by…_www.myabandonware.com</a><a href="https://www.myabandonware.com/game/jsf-dh2#download"></a></p>
+<p>Postman is a popular API client that makes it easy for developers to create, share, test and document APIs. This is done by allowing users to create and save simple and complex HTTP/s requests, as well as read their responses. The result — more efficient and less tedious work.</p>
 
-<p>After downloading the 604MB file, there will be two files available in the download folder. Double click on the jsfv10.mds file.</p>
+<p>DCR flow consist of these steps.</p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*04VS8EjQd_GL3Z8tVDqQOQ.jpeg" alt="" /></p>
+<ol>
+  <li>Sending a POST request containing a JWT body that includes an SSA (Software Statement Assertion)</li>
+  <li>Using the client ID received from the POST request to send another POST request to get an access token.</li>
+  <li>Using the access token to send PUT, GET and DELETE requests.</li>
+</ol>
 
-<p>Make sure to keep this mounted as a drive, whenever running the game. This has been done for the purpose of copyright protection.</p>
+<p>This flow is tedious due to following reasons.</p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*OkSQRt73XCAjLHgj0PAPBw.jpeg" alt="" /></p>
+<p>POST and PUT requests are JWTs signed using private keys. This signing process usually require the person to use jwt.io website and manually sign them in the web page. This involves a lot of copying and pasting.</p>
 
-<p>Execute launch.exe.</p>
+<p>Even the POST request that request for access token need to include a JWT called <strong>client assertion.</strong> This is a onetime use JWT and this needs to be changed and signed all the time.</p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*-S2cre8HAVLPGcpKeZhFhA.jpeg" alt="" /></p>
+<p>There is additional copying and pasting as well.</p>
 
-<p>For the first time, ‘Run Joint Strike Fighter’ button will be ‘Install Joint Strike Fighter’. Go through simple installation workflow to get the JSF game installed in the computer. The total installation size will not exceed 150MBs.</p>
+<p>When errors occur due to various reasons, the whole process can get very hard to cope up with. Troubleshooting becomes very tedious.</p>
 
-<p>In the next step, when you try to Run Joint Strike Fighter, Windows 10 will require you to download and install <em>Direct Play</em>. Direct play is very important for the execution of the game. If your computer has not enabled Direct Play, try to enable Direct Play in the windows system. This can be easily found through google search.</p>
+<p>The solution is to use <strong>Pre-request Scripts😃</strong> as facilitated by Postman software.</p>
 
-<blockquote>
-  <p>After installing Direct Play make sure to Restart the computer to get the exe file working. Otherwise 0Xc0000022 error will pop up.</p>
-</blockquote>
+<p>Let’s start the Postman software and get started with POST request.</p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*NRY3csUM9Hb1VEOtPWrtXw.jpeg" alt="" /></p>
+<p>For the demonstration here, I’m using <strong>UK DCR</strong> flow. If you need to see the power of Pre-request Scripts, try to invoke Postman API calls without using them. Additionally, going through the steps given in the below article as explained by WSO2 Open Banking documentation will help you understand the process much better.</p>
 
-<p>When you click Install Microsoft DirectX5.0 button, something like this will pop up. This installation might not work properly, but for the purpose of running the game, having half of the stuff is enough. The above is a screenshot I took after getting JSF working on my computer. It seems installing Direct Play is the most important part here.</p>
+<p><a href="https://docs.wso2.com/display/OB200/Dynamic+Client+Registration+v3.2" title="https://docs.wso2.com/display/OB200/Dynamic+Client+Registration+v3.2"><strong>Dynamic Client Registration v3.2</strong><br />
+_Before you begin: Deploy the Dynamic Client Registration (DCR) API v3.2. Click here to see how to deploy the DCR API To…_docs.wso2.com</a><a href="https://docs.wso2.com/display/OB200/Dynamic+Client+Registration+v3.2"></a></p>
 
-<p>The game will not run on Windows 10 machine even after following above steps for the following interesting reason.</p>
+<p>POST request</p>
 
-<p>This game was released in 1997. This means this game was intended to run in Windows 95 computers. If you look carefully, there is another button ‘Install 3Dfx Drivers’. This button will not work in Windows 10 anyway. I tried going through the process in Windows 98 in virtual box.</p>
+<p>In the Postman software create a new request and fill the URL part and Headers tab as below. Since you are sending a POST request, set the request type to POST.</p>
 
-<p>This is what I got, when I clicked ‘Install 3Dfx Drivers’,</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*NQ0EtQHoQAwabq3Lgi91hQ.png" alt="" /></p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*ktlwR62wGwsruE9XqoOgTQ.jpeg" alt="" /></p>
+<p>Now the most important part in making the flow x10 faster is learning to use environments and variables in Postman.</p>
 
-<p>From this one can see that these are very old drivers. Apparently installation failed because there is no reason for my computer to have a very old graphics card from 1990s. Running the game in Windows 98 virtual box is not going to work. In Windows 10 also 3D graphic rendering part needs to be handled.</p>
+<h4 id="using-environments-and-variables">Using environments and variables</h4>
 
-<blockquote>
-  <p><strong>3dfx Interactive</strong> was a company headquartered in San Jose, California, founded in 1994, that specialized in the manufacturing of 3D graphics processing units, and later, graphics cards. It was a pioneer in the field from the late 1990s until 2000.</p>
-</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*lHezStrtYb2Eo0gvqMik8w.png" alt="" /></p>
 
-<blockquote>
-  <p>The company’s original product was the Voodoo Graphics, an add-in card that implemented hardware acceleration of 3D graphics. The hardware accelerated only 3D rendering, relying on the PC’s current video card for 2D support. Despite this limitation, the Voodoo Graphics product and its follow-up, Voodoo2, were popular. It became standard for 3D games to offer support for the company’s Glide API.</p>
-</blockquote>
+<p>Above is a screenshot of the upper right corner of the Postman software. Please add the following variable names as given below. After creating the environment UK_DCR_3.3, add global variables in addition to environment variables.</p>
 
-<p>In order to get this part done, install nGlide 2.0 from the below site.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*dfKmwe3wRYDjEQlM5GltdA.png" alt="" /></p>
 
-<p><a href="https://www.zeus-software.com/downloads/nglide" title="https://www.zeus-software.com/downloads/nglide"><strong>nGlide - Glide wrapper | Zeus Software</strong><br />
-_nGlide is a 3Dfx Voodoo Glide wrapper. It allows you to play games designed for 3Dfx Glide API without the need for…_www.zeus-software.com</a><a href="https://www.zeus-software.com/downloads/nglide"></a></p>
+<p>Use of variables and environments make the process very fast by removing the need to copy and paste so many values. Setting the values here and referring them by their variable names is very convenient.</p>
 
-<p>After downloading go through normal installation steps. Then go into this file path and find nglide_config.exe file.</p>
+<p>We need to worry about setting values for software_statement, private_key and jsrasign-js. Others are automatically set by the Pre-request Scripts that we are going to use later.</p>
 
-<blockquote>
-  <p>C:\Windows\SysWOW64</p>
-</blockquote>
+<p>Copy and paste the following text in the software_statement field.</p>
 
-<p>Create a shortcut of this file in the desktop. Add following settings in the nGlide_config and Apply.</p>
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/0d1c04ea53898e9b452226013a03252b.js"> </script>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*glsKPX-eI_tbkFRk5J5_rg.jpeg" alt="" /></p>
+<p>Copy and paste the following text in the private_key field.</p>
 
-<p>The next step is setting up Reshade on the JSF folder in the computer. This part is optional because, the game worked fine without Reshade in my computer. For this download Reshade through this link.</p>
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/aba4a178ec5c1dd2c0b29980e6388dd7.js"> </script>
 
-<p><a href="https://reshade.me/" title="https://reshade.me/"><strong>ReShade</strong><br />
-_ReShade is a generic post-processing injector for games and video software developed by crosire. Imagine your favorite…_reshade.me</a><a href="https://reshade.me/"></a></p>
+<p>Copy and paste the following JavaScript code in the jsrasign-js field. This is a JavaScript that runs and creates JWTs out of JSON texts using the private key given.</p>
 
-<p>Open the Reshade setup and select the game file as,</p>
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/f89e2a404fd52eb3a4151e2994eb22d9.js"> </script>
 
-<p>C:\Program Files (x86)\Eidos Interactive\Joint Strike Fighter\jsf.exe</p>
+<p>With these values in place, now you are ready to prepare the rest of the POST request. Write  to call this variable in the Body tab.</p>
 
-<p>Select Direct3D 9 and go through below installation. After going through this step make sure there are additional files added by Reshade in the JSF folder.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*Ek6kmsUsUX1mmCH0yDmROg.png" alt="" /></p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*FgYfA69_jtSbqatpYq3B8w.png" alt="" />
-<img src="https://cdn-images-1.medium.com/max/800/1*UWqxCB8UTPqRhO_iBlg4cA.png" alt="" /></p>
+<p>Pre-request Script tab is a little bit tricky. This is a JavaScript code that runs before the request is sent.</p>
 
-<p>Finally, you are ready to run Joint Strike Fighter in your Windows 10 computer. Before running jsf.exe. Right click and go to properties. Select Reduced color mode in the settings.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*lxNew_vb9UtqiH65wdrBug.png" alt="" /></p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*klggKUTcxHaD-SkqMt1QTA.png" alt="" /></p>
+<p>Add the following code in the Pre-request Script tab.</p>
 
-<p>Here is a screenshot of the game I obtained after successfully running the game in my Windows 10 system.</p>
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/ed1c61675c5f42a66b2f5b5466266fa3.js"> </script>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*dEEIkyvLD-vfvhoqd0i7UQ.jpeg" alt="" /></p>
+<p>Now your POST request is ready to run. Let’s add this additional JavaScript code in the Test tab. This will provide functionality to grab the client ID received in the response, when the response is received.</p>
 
-<p>Good luck setting up!</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*1n2aCEzmXGYKXawA8-uXyg.png" alt="" /></p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/e3598a41000a22ee8e97620d08d8c600.js"> </script>
+
+<p>If not for the first attempt, you will be able to get this POST request working after some troubleshooting. Just remember that this seems complex at first glance, but using JavaScript will make the process a lot faster.</p>
+
+<p>Let’s move on to the next request in the DCR flow, which is the request for obtaining the access token.</p>
+
+<h4 id="obtaining-the-accesstoken">Obtaining the access token</h4>
+
+<p>Try to create a new request as given in the following screenshots.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*chDOIdxwji7BEFZM_37dUQ.png" alt="" />
+<img src="https://cdn-images-1.medium.com/max/600/1*sPwMJA0UydaG8IdMjPtGJA.png" alt="" /></p>
+
+<p><img src="https://cdn-images-1.medium.com/max/600/1*84_kkxP8MsXKElUJfEf8Cg.png" alt="" />
+<img src="https://cdn-images-1.medium.com/max/800/1*STnUjHmp8AnBJ2hQ9v7P8w.png" alt="" /></p>
+
+<p>Given below are the Pre-request Script and Test script for this request.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/8bf42b63f6c6c07fa72870606e19467.js"> </script>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/4cd9b91d2305af889a81cb7d65840d69.js"> </script>
+
+<p>The Test script grabs the access token received from the response. Now using this access token we can send PUT, DELETE and GET requests. After getting thorough with first two requests I explained above, PUT-GET-DELETE requests will not be a big challenge. You will definitely be able to experiment and get these last three requests done. Given below is a screenshot of the PUT request.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*wJbcBWdxcM5PCynHjiX93w.png" alt="" /></p>
+
+<p>Good luck troubleshooting and going through the rest of the DCR UK flow!</p>
+
+<h4 id="references">References</h4>
+
+<ol>
+  <li><a href="https://www.blazemeter.com/blog/how-use-postman-manage-and-execute-your-apis">https://www.blazemeter.com/blog/how-use-postman-manage-and-execute-your-apis</a></li>
+  <li><a href="https://docs.wso2.com/display/OB200/Dynamic+Client+Registration+v3.2">https://docs.wso2.com/display/OB200/Dynamic+Client+Registration+v3.2</a></li>
+</ol>
 
         </div>
     </div>
@@ -164,8 +199,8 @@ _ReShade is a generic post-processing injector for games and video software deve
     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
     
     var disqus_config = function () {
-    this.page.url = 'http://harinduravin.github.io/2020/12/30/@harinduravin-setting-up-legacy-1997-joint-strike-fighter-jsf-game-on-windows-10-system-6a60f502d015.html';  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = '/2020/12/30/@harinduravin-setting-up-legacy-1997-joint-strike-fighter-jsf-game-on-windows-10-system-6a60f502d015.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.url = 'http://harinduravin.github.io/2021/01/19/@harinduravin-make-your-open-banking-dcr-flow-test-10-times-faster-in-postman-ebcb6eff14ad.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = '/2021/01/19/@harinduravin-make-your-open-banking-dcr-flow-test-10-times-faster-in-postman-ebcb6eff14ad.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
