@@ -3,20 +3,18 @@
 	<head>
 		<meta charset="utf-8">
 		<!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>How to decrypt a JSON Web Encryption (JWE) using JAVA</title>
+<title>Streaming OpenCV frames as a video using ROS</title>
 <meta name="generator" content="Jekyll v4.2.0" />
-<meta property="og:title" content="How to decrypt a JSON Web Encryption (JWE) using JAVA" />
+<meta property="og:title" content="Streaming OpenCV frames as a video using ROS" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="JSON Web Token (JWT) defines a container to transport data between interested parties. It became an IETF standard in May 2015 with the RFC 7519. There are multiple applications of JWT. The OpenID Connect is one of them. In OpenID Connect the id token is represented as a JWT. Both in securing APIs and Microservices, the JWT is used as a way to propagate and verify end-user identity." />
-<meta property="og:description" content="JSON Web Token (JWT) defines a container to transport data between interested parties. It became an IETF standard in May 2015 with the RFC 7519. There are multiple applications of JWT. The OpenID Connect is one of them. In OpenID Connect the id token is represented as a JWT. Both in securing APIs and Microservices, the JWT is used as a way to propagate and verify end-user identity." />
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/800/1*_DkcB2a_15K39gpPs0VAKg.png" />
+<meta property="og:image" content="/images/Sending_opencv_frames/stream_logo.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-12-11T19:26:58+05:30" />
+<meta property="article:published_time" content="2021-08-18T06:53:26+05:30" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://cdn-images-1.medium.com/max/800/1*_DkcB2a_15K39gpPs0VAKg.png" />
-<meta property="twitter:title" content="How to decrypt a JSON Web Encryption (JWE) using JAVA" />
+<meta property="twitter:image" content="/images/Sending_opencv_frames/stream_logo.png" />
+<meta property="twitter:title" content="Streaming OpenCV frames as a video using ROS" />
 <script type="application/ld+json">
-{"url":"/2020/12/11/@harinduravin-how-to-decrypt-a-json-web-encryption-jwe-using-java-4146ef3082a6.html","headline":"How to decrypt a JSON Web Encryption (JWE) using JAVA","dateModified":"2020-12-11T19:26:58+05:30","datePublished":"2020-12-11T19:26:58+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/12/11/@harinduravin-how-to-decrypt-a-json-web-encryption-jwe-using-java-4146ef3082a6.html"},"description":"JSON Web Token (JWT) defines a container to transport data between interested parties. It became an IETF standard in May 2015 with the RFC 7519. There are multiple applications of JWT. The OpenID Connect is one of them. In OpenID Connect the id token is represented as a JWT. Both in securing APIs and Microservices, the JWT is used as a way to propagate and verify end-user identity.","image":"https://cdn-images-1.medium.com/max/800/1*_DkcB2a_15K39gpPs0VAKg.png","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/2021/08/18/@harinduravin-sending-opencv-frames-as-a-video-stream-using-ros.html","headline":"Streaming OpenCV frames as a video using ROS","dateModified":"2021-08-18T06:53:26+05:30","datePublished":"2021-08-18T06:53:26+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/08/18/@harinduravin-sending-opencv-frames-as-a-video-stream-using-ros.html"},"image":"/images/Sending_opencv_frames/stream_logo.png","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +23,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="icon" href="/images/infinity.png">
-		<title>Infinity & Beyond! - How to decrypt a JSON Web Encryption (JWE) using JAVA</title>
+		<title>Infinity & Beyond! - Streaming OpenCV frames as a video using ROS</title>
 		<!-- Bootstrap core CSS -->
 		<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -88,151 +86,50 @@
                 <div class="col-md-8">
 <article class="blog-post">
     <div class="blog-post-body">
-        <h2><a href=#>How to decrypt a JSON Web Encryption (JWE) using JAVA</a></h2>
-        <div class="post-meta"><span>by <a href="#">Harindu Jayarathne</a></span>|<span><i class="fa fa-clock-o"></i>11 Dec 2020</span>|<span><a href="/2020/12/11/@harinduravin-how-to-decrypt-a-json-web-encryption-jwe-using-java-4146ef3082a6.html#disqus_thread"></a></span></div>
+        <h2><a href=#>Streaming OpenCV frames as a video using ROS</a></h2>
+        <div class="post-meta"><span>by <a href="#">Harindu Jayarathne</a></span>|<span><i class="fa fa-clock-o"></i>18 Aug 2021</span>|<span><a href="/2021/08/18/@harinduravin-sending-opencv-frames-as-a-video-stream-using-ros.html#disqus_thread"></a></span></div>
         <div class="blog-post-text">
-            <p><img src="https://cdn-images-1.medium.com/max/800/1*_DkcB2a_15K39gpPs0VAKg.png" alt="" /></p>
+            <p style="text-align: center;">
+ <img src="/images/Sending_opencv_frames/stream_logo.png" alt="drawing" width="500" />
+</p>
 
-<blockquote>
-  <p>JSON Web Token (JWT) defines a container to transport data between interested parties. It became an IETF standard in May 2015 with the RFC 7519. There are multiple applications of JWT. The OpenID Connect is one of them. In OpenID Connect the <em>id_token</em> is represented as a JWT. Both in securing APIs and Microservices, the JWT is used as a way to propagate and verify end-user identity.</p>
-</blockquote>
+<p>Imagine you need to edit a video frame by frame using openCV. You need these frames stitched back together into a video. The video input is realtime and you might need the real time processed video streamed through a local network. A common use case would be CCTV surveillance. The camera video input needs to be attached with time stamps. And also automatic object detection bounding boxes in the surveillance camera need to be added before streaming to the internet.</p>
 
-<p>Above description is a direct reference from,</p>
+<p>This article will explain how to collect incoming openCV frames and send a video stream output through a local WiFi network. The stream can then be visualized on another device in the same local network.</p>
 
-<div class="jekyll-linkpreview-wrapper">
-  <div class="jekyll-linkpreview-wrapper-inner">
-    <div class="jekyll-linkpreview-content">
-<div class="jekyll-linkpreview-image">
-  <a href="https://medium.facilelogin.com/jwt-jws-and-jwe-for-not-so-dummies-b63310d201a3" target="_blank">
-    <img src="https://miro.medium.com/max/1200/1*7kMzKIS0xi0PVcc1IYcv2Q.jpeg" />
-  </a>
-</div>
+<p>In this article this is implemented in ROS (Robot Operating System). The implementation has been tested in both ROS Noetic and Melodic in Ubuntu 20.04 and 18.04 environments. The code is implemented in a ROS node. It is assumed that the ROS node is getting an incoming stream of image frames through a ROS topic. The image frames are received in the standard sensor_msgs <a href="http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html">Image</a> message format. In my example the ROS topic receives these frames at a rate of 30 FPS.</p>
 
-      <div class="jekyll-linkpreview-body">
-        <h2 class="jekyll-linkpreview-title">
-          <a href="https://medium.facilelogin.com/jwt-jws-and-jwe-for-not-so-dummies-b63310d201a3" target="_blank">JWT, JWS and JWE for Not So Dummies! (Part I)</a>
-        </h2>
-        <div class="jekyll-linkpreview-description">JSON Web Token (JWT) defines a container to transport data between interested parties. It became an IETF standard in May 2015 with the RFC…</div>
-      </div>
-    </div>
-    <div class="jekyll-linkpreview-footer">
-      <a href="medium.facilelogin.com" target="_blank">medium.facilelogin.com</a>
-    </div>
-  </div>
-</div>
+<p>The goal is to create a ROS node that process the received frames using OpenCV and then stream. The processing part can be any of the standard image processing functions available in the openCV library. For the streaming part we came across two methods.</p>
 
-<p>There are two types of encryption,</p>
+<h3 id="using-a-python-flask-server">Using a python flask server</h3>
 
-<ol>
-  <li>Symmetric encryption</li>
-  <li>Asymmetric encryption</li>
-</ol>
+<p>The easiest method in implementing the above discussed ROS node is to use a flask server. For this flask needs to be installed using basic installation steps available on the web. After installation the next step is creating a new python ROS node with the following code.</p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*qFcIscbuAMf80JHFkep97Q.png" alt="" /></p>
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/2a96ce86829280e0f6dcb5aa85e0b4fa.js"> </script>
 
-<p>A quick youtube video or google search can help one understand this concept. These two types of encryption exist in JSON Web Tokens (JWT) as well. As explained above, JWTs are used as containers to transport data between two parties.</p>
+<p>After implementing the node the terminal should end up displaying something similar to this. It will point to a link that will display the video stream. This link can be accessed through the same computer as well as other devices that are connected to the WiFi local network. The particular link is dependent on the IP address of the computer. In my application the link was http://192.168.1.13:5000/.</p>
 
-<p>Let’s say for example your mobile banking app is acquiring banking data from the bank to your phone. Some data might be very confidential. You do not want anyone to get their hands on them while in the network.</p>
+<p style="text-align: center;">
+ <img src="/images/Sending_opencv_frames/flaskterminal.png" alt="drawing" width="700" />
+</p>
 
-<p>For this purpose, <strong>JWEs</strong> can be used. To communicate using JWEs, <strong>both symmetric and asymmetric</strong> encryption is used.</p>
+<p>In the same folder the ROS node script is placed, two other folders called ‘static’ and ‘templates’ should be placed. In the ‘templates’ folder an html file can be placed. In static folder css, js files and images can be placed. The name of the html file should match with the name mentioned in the ROS node. A basic html file should include the following.</p>
 
-<p>Some data might be not so critical as well, but the banks may need to know for sure that the data you send is actually from you.</p>
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/90a3e4675d84bb622eefae1b5bae7c1d.js"> </script>
 
-<p>For this purpose, <strong>JWS</strong> (JSON Web Signature) can be used. If anyone in the internet get their hands on with this data, they can know exactly what you sent, because you have encoded the data (but not encrypted) with a famous encoding method(base64url).</p>
+<p>Finally when the webpage is accessed through another device it viewed similar to this. The web page here is included with some css and js functionality.</p>
 
-<p><img src="https://cdn-images-1.medium.com/max/800/1*xQ-xuOiV8O9doAcSiqKPOQ.png" alt="" /></p>
+<p style="text-align: center;">
+ <img src="/images/Sending_opencv_frames/browser.png" alt="drawing" width="700" />
+</p>
 
-<p>JWS can be generated easily using the following website,</p>
+<p>Since a browser is used, any type of device was able to stream the video through the network. Even though it was quick and easy to set up, the quality of the stream drastically reduced when the resolution was increased from 480p. The ROS node was using nearly 100% CPU.  There was no way to optimize the stream.</p>
 
-<div class="jekyll-linkpreview-wrapper">
-  <div class="jekyll-linkpreview-wrapper-inner">
-    <div class="jekyll-linkpreview-content">
-<div class="jekyll-linkpreview-image">
-  <a href="https://jwt.io/" target="_blank">
-    <img src="http://jwt.io/img/facebook-card.png" />
-  </a>
-</div>
+<h3 id="using-ffmpeg-library">Using FFmpeg library</h3>
 
-      <div class="jekyll-linkpreview-body">
-        <h2 class="jekyll-linkpreview-title">
-          <a href="https://jwt.io/" target="_blank">JWT.IO</a>
-        </h2>
-        <div class="jekyll-linkpreview-description">JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.</div>
-      </div>
-    </div>
-    <div class="jekyll-linkpreview-footer">
-      <a href="jwt.io" target="_blank">jwt.io</a>
-    </div>
-  </div>
-</div>
-
-<p>To create a JWS, data is represented as JSON and then signed using the sender’s private key. The receiver can then use the sender’s public key (which is available without restriction) and validate the sender.</p>
-
-<p>Using JWT.io site to create JWS and validate JWS is the easy part. Sometimes we need to send data using JWEs. Here, actual encryption takes place in addition to usual base64url encoding.</p>
-
-<p>JWE is more complex than this. It has 5 parts connected using periods.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/800/1*lgMjCBtkaH1PiH8jy4zpyg.png" alt="" /></p>
-
-<p>Say you receive a JWE, encrypted using your public key. Now since you have your private key, only you should be able to decrypt with your private key. you can decrypt the second part (Encrypted Key) in the image. This can be confusing. The second section in the image is the encrypted encryption key of the payload (data).</p>
-
-<p>In order to obtain data, we need the <strong>key</strong> ( Symmetric encryption key) which is encrypted using an asymmetric encryption key. As explained earlier, this is the use of both symmetric and asymmetric keys.</p>
-
-<p>Unlike JWS, there seems to be no reputable sites for the purpose of encrypting and decrypting JWEs. This is due to obvious security risk of getting private keys public.</p>
-
-<p>-—-BEGIN PRIVATE KEY—–<br />
-MIIEowIBAAKCAQEAvpnaPKLIKdvx98KW68lz8pGaRRcYersNGqPjpifMVjjE8LuC<br />
-oXgPU0HePnNTUjpShBnynKCvrtWhN+haKbSp+QWXSxiTrW99HBfAl1MDQyWcukoE<br />
-b9Cw6INctVUN4iRvkn9T8E6q174RbcnwA/7yTc7p1NCvw+6B/aAN9l1G2pQXgRdY<br />
-C/+G6o1IZEHtWhqzE97nY5QKNuUVD0V09dc5CDYBaKjqetwwv6DFk/GRdOSEd/6b<br />
-W+20z0qSHpa3YNW6qSp+x5pyYmDrzRIR03os6DauZkChSRyc/Whvurx6o85D6qpz<br />
-ywo8xwNaLZHxTQPgcIA5su9ZIytv9LH2E+lSwwIDAQABAoIBAFml8cD9a5pMqlW3<br />
-f9btTQz1sRL4Fvp7CmHSXhvjsjeHwhHckEe0ObkWTRsgkTsm1XLu5W8IITnhn0+1<br />
-iNr+78eB+rRGngdAXh8diOdkEy+8/Cee8tFI3jyutKdRlxMbwiKsouVviumoq3fx<br />
-OGQYwQ0Z2l/PvCwy/Y82ffq3ysC5gAJsbBYsCrg14bQo44ulrELe4SDWs5HCjKYb<br />
-EI2b8cOMucqZSOtxg9niLN/je2bo/I2HGSawibgcOdBms8k6TvsSrZMr3kJ5O6J+<br />
-77LGwKH37brVgbVYvbq6nWPL0xLG7dUv+7LWEo5qQaPy6aXb/zbckqLqu6/EjOVe<br />
-ydG5JQECgYEA9kKfTZD/WEVAreA0dzfeJRu8vlnwoagL7cJaoDxqXos4mcr5mPDT<br />
-kbWgFkLFFH/AyUnPBlK6BcJp1XK67B13ETUa3i9Q5t1WuZEobiKKBLFm9DDQJt43<br />
-uKZWJxBKFGSvFrYPtGZst719mZVcPct2CzPjEgN3Hlpt6fyw3eOrnoECgYEAxiOu<br />
-jwXCOmuGaB7+OW2tR0PGEzbvVlEGdkAJ6TC/HoKM1A8r2u4hLTEJJCrLLTfw++4I<br />
-ddHE2dLeR4Q7O58SfLphwgPmLDezN7WRLGr7Vyfuv7VmaHjGuC3Gv9agnhWDlA2Q<br />
-gBG9/R9oVfL0Dc7CgJgLeUtItCYC31bGT3yhV0MCgYEA4k3DG4L+RN4PXDpHvK9I<br />
-pA1jXAJHEifeHnaW1d3vWkbSkvJmgVf+9U5VeV+OwRHN1qzPZV4suRI6M/8lK8rA<br />
-Gr4UnM4aqK4K/qkY4G05LKrik9Ev2CgqSLQDRA7CJQ+Jn3Nb50qg6hFnFPafN+J7<br />
-7juWln08wFYV4Atpdd+9XQECgYBxizkZFL+9IqkfOcONvWAzGo+Dq1N0L3J4iTIk<br />
-w56CKWXyj88d4qB4eUU3yJ4uB4S9miaW/eLEwKZIbWpUPFAn0db7i6h3ZmP5ZL8Q<br />
-qS3nQCb9DULmU2/tU641eRUKAmIoka1g9sndKAZuWo+o6fdkIb1RgObk9XNn8R4r<br />
-psv+aQKBgB+CIcExR30vycv5bnZN9EFlIXNKaeMJUrYCXcRQNvrnUIUBvAO8+jAe<br />
-CdLygS5RtgOLZib0IVErqWsP3EI1ACGuLts0vQ9GFLQGaN1SaMS40C9kvns1mlDu<br />
-LhIhYpJ8UsCVt5snWo2N+M+6ANh5tpWdQnEK6zILh4tRbuzaiHgb<br />
--—-END PRIVATE KEY—–</p>
-
-<p>This is not a real private key, but private keys look like this.</p>
-
-<p>Let’s say we receive a JWE. By looking carefully, five parts of the JWE separated by four dots can be observed.</p>
-
-<blockquote>
-  <p>“eyJraWQiOiJEd01LZFdNbWo3UFdpbnZvcWZReVhWenlaNlEiLCJlbmMiOiJBMTI4R0NNIiwiYWxnIjoiUlNBMV81In0.H7oZNGtNPSPZWSaZWZjCHICIfc06w7h0XeJwVWmbJDFqtzIYCXSxyj-DYrVfP9lEmgWglv-WvYMnYEKxbnmrCu1mzGc-QjK4eHEMN_Z3sD4O-xZjGNVeMCCqxSS6pSTCoRUXTkpl2ENllfEtrnXzqj2xQQMfi98UPTRf3EXKjKt3Ks3x44KQLxk1cYvFuxDzzC0p5Kt1HEeinuzuQHTuPc0uoRC0RhUrGsRTgWkQDBqEDUDFUIE4GY9wQ1sJ1f9ulvtH4NHcHJVvM97aUmHL04bCzoulbWUKzmFxXOBSo41psegzRUWYPVg_m9dXHvJM_txY8gCypiU3AXhXT0mVfg.fdfDTkGkjGCyxuYs.gFT6LnqcVw5dV2gaOl0NylpRv89ThLcB3EQ2wFubuFDGuc9BFx16KNlObXkAcqAM_oZtijErN48IPfZFtCoXrSFDzOiLK1zeHegeW8G8sQkR45XXGvqf_dvR7cm5R9MzIPQhYZ4VilKbtlOwOlmQHz2FfxKTpEqXzMhjBIwW767wy4VR-mKIn1_8Nv2pGEb6g7EBmGbBtOb6o9kq4aip0nrh_KYNF9KLsJd1Ysma7gs-wAvX4siZXQbNMNlGe4DV14j3atW4ChsSdKYXGCze4W5SwqQemGMsHvLWv4wFWObxW0Xbo2nizecemibp-LIlQZ5QM-66xMb4tgysUDRZhoOWhJBPBmMSKyslwOlgpbzn20SYzaqNxRW9wIHG4kSu3cpeEbBh-X1HEjf8ULCBz5Jxac-tM46btxM_zxDaEFqpgM_7oKWC5Kv0TQn3V4OUk8RHhAdEF9pmsPKxyx_tvSgXpj2l7BwDCIxdEwzWSMJYI0ed-p8D5w5ZRYb8DS4.kCMw9Xn9eGEitd8MQio0bA”</p>
-</blockquote>
-
-<p>Our goal is to decrypt the above JWE using a private key like the previous picture. Below code can be used to decrypt and retrieve the data from the JWE. Make sure to start the project as a Maven project in order to add dependencies when required.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/800/1*osCD8dQ3ueH2DnTGDhxsUw.png" alt="" /></p>
-
-<p><em>Access the JAVA project through this link:</em></p>
-
-<p><a href="https://github.com/harinduravin/JWEdecrypt"><em>https://github.com/harinduravin/JWEdecrypt</em></a></p>
-
-<p>Modulus and private exponent parts are a result of converting the Private key string to a friendly format (RSA format). Converting the private key was essential for the actual decryption part. Actual decryption process is complex and involve mathematics. Different algorithms used in these can be studied as well.</p>
-
-<p>The second part of the response is the decrypted payload, which is an id token. As explained in the first paragraph, OpenID Connect is one of the applications of JWT. An id token is a part of OpenID Connect. The payload of the response shows the claims expected from this id token.</p>
-
-<p>If the private key is not matching with the public key used by sender, an error will occur in the following code line.</p>
-
-<p><strong>jwt.decrypt(decrypter);</strong></p>
-
-<p>References:</p>
+<p>“FFmpeg is a free and open-source software project consisting of a a large amount of libraries and programs for handling video, audio and other multimedia files and streams”. This is a direct reference to the FFmpeg website.</p>
 
 <div class="jekyll-linkpreview-wrapper">
   <div class="jekyll-linkpreview-wrapper-inner">
@@ -240,17 +137,48 @@ LhIhYpJ8UsCVt5snWo2N+M+6ANh5tpWdQnEK6zILh4tRbuzaiHgb<br />
 
       <div class="jekyll-linkpreview-body">
         <h2 class="jekyll-linkpreview-title">
-          <a href="https://is.docs.wso2.com/en/5.9.0/learn/decrypting-openid-connect-encrypted-id-tokens/" target="_blank">Decrypting OpenID Connect Encrypted ID Tokens - WSO2 Identity Server Documentation</a>
+          <a href="https://www.ffmpeg.org" target="_blank">
+FFmpeg</a>
         </h2>
-        <div class="jekyll-linkpreview-description">The WSO2 Identity Server provides encrypted ID Tokens to address some
-security vulnerabilities in the production environment....</div>
+        <div class="jekyll-linkpreview-description">
+    We have a new IRC home at Libera Chat
+    now! Feel free to join us at #ffmpeg and #ffmpeg-devel. More info at contact#IRCChannels
+  ...</div>
       </div>
     </div>
     <div class="jekyll-linkpreview-footer">
-      <a href="is.docs.wso2.com" target="_blank">is.docs.wso2.com</a>
+      <a href="www.ffmpeg.org" target="_blank">www.ffmpeg.org</a>
     </div>
   </div>
 </div>
+
+<p>While trying to use this library for my purpose, there were many instances and guides to use the RTMP(Real-Time Messaging Protocol) protocol. I continuously got an error similar to “TCP connection refused”. The obvious reason was that RTMP uses TCP(Transport Control Protocol) transport protocol. TCP usually needs a listener at the other end to do a hand-shake before the transmission. Without a proper listener at the other end I was unable to overcome this error. Then I decided to use the RTP(Real-time Transport Protocol) protocol instead of the RTMP protocol. The RTP protocol could be implemented without a “TCP connection refused” error because it uses UDP(User Datum Protocol), which is lightweight and faster. Low accuracy in UDP did not cause much of a problem.</p>
+
+<p>Before implementing the ROS node FFmpeg needs to be installed first. Even though internet sources refer to something called “FFServer” this is not required to implement the video stream in our application. It seems FFServer was installed along with the FFmpeg library in the early times. And they seem to have removed the FFServer from FFmpeg. There is no issue downloading the newest FFmpeg library.</p>
+
+<p>This is the ROS node implementation done using FFmpeg library.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/5eebe0816894cd269e2abbb686366d16.js"> </script>
+
+<p>rtmp_url = “rtp://192.168.1.3:1234/stream” This line provides the link for the video stream. The IP address here is the IP address of the device one expect the stream to be received. It is worth noting that the port number 1234 was the one that resulted in successful implementation. I needed VLC media player to receive the video stream. The server side will look like this once the stream is initiated.</p>
+
+<p style="text-align: center;">
+ <img src="/images/Sending_opencv_frames/ffmpegterminal.png" alt="drawing" width="700" />
+</p>
+
+<p>In order to open the stream in VLC player, create a file with the extension “SDP”. Include the text as shown here. Then try to open the file in VLC and play it.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/eb89bba96d9b968220f9a1c8e1bf5be9.js"> </script>
+
+<p>It should be noted that c=IN IP4 192.168.1.3 line should include the IP address of the receiver. This resulted in a better video stream than the earlier. Probably, there exists many ways to optimize this stream because FFmpeg facilitates optmization. This how the stream looked like on VLC player.</p>
+
+<p style="text-align: center;">
+ <img src="/images/Sending_opencv_frames/vlc.png" alt="drawing" width="700" />
+</p>
+
+<p>Good luck setting up!</p>
 
         </div>
     </div>
@@ -264,8 +192,8 @@ security vulnerabilities in the production environment....</div>
     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
     
     var disqus_config = function () {
-    this.page.url = 'http://harinduravin.github.io/2020/12/11/@harinduravin-how-to-decrypt-a-json-web-encryption-jwe-using-java-4146ef3082a6.html';  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = '/2020/12/11/@harinduravin-how-to-decrypt-a-json-web-encryption-jwe-using-java-4146ef3082a6.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.url = 'http://harinduravin.github.io/2021/08/18/@harinduravin-sending-opencv-frames-as-a-video-stream-using-ros.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = '/2021/08/18/@harinduravin-sending-opencv-frames-as-a-video-stream-using-ros.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
